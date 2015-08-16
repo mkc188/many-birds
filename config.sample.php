@@ -14,21 +14,21 @@ $_CONF = array();
 $_CONF['db'] = array();
 $_CONF['db']['host'] = 'localhost';
 $_CONF['db']['port'] = '3306';
-$_CONF['db']['user'] = 'reteazbp_birds';
-$_CONF['db']['pass'] = 'bdZz9fSZsWJ5MXsn';
-$_CONF['db']['name'] = 'reteazbp_manybirds';
+$_CONF['db']['user'] = '';
+$_CONF['db']['pass'] = '';
+$_CONF['db']['name'] = '';
 
 /*
  * Facebook API Configuration
  */
 $_CONF['fb'] = array();
-$_CONF['fb']['appid']  = '835001473193147';
-$_CONF['fb']['secret'] = '4571179210e327f8d2e9d69fa93fe207';
+$_CONF['fb']['appid']  = '';
+$_CONF['fb']['secret'] = '';
 
 /*
  * Security Configuration
  */
-$_CONF['oauth_secret'] = 'd27dca78f983d57cbf5147c04c62eb70';
+$_CONF['oauth_secret'] = '';
 $_CONF['session_lifetime'] = 604800;  // one week
 $_CONF['max_score_per_sec'] = 1;
 $_CONF['max_concurrent_client'] = 5;
