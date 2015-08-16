@@ -1,0 +1,18 @@
+<div class="col-md-2 col-sm-3 col-xs-6">
+    <div class="thumbnail panel-primary">
+        <div class="bird-display-top"></div>
+        <div class="bird-cage">
+        	<div class="bird-display" style="background-image: url({{path}}); height: {{height}}px; width: {{width}}px; -webkit-animation: fly_{{width}} .8s steps(3, end) infinite; -moz-animation: fly_{{width}} .8s steps(3, end) infinite; animation: fly_{{width}} .8s steps(3, end) infinite;"></div>
+        </div>
+        <div class="caption">
+            <h3>{{name}}</h3>
+            {{#is-free}}
+            <h4><span class="label label-success">Free <span class="glyphicon glyphicon-ok"></span></span></span></h4><br/>
+            {{/is-free}}
+            {{^is-free}}
+            <h4>Price: <span class="label label-success">{{price}} <span class="glyphicon glyphicon-ok"></span></span></span></h4><br/>
+            {{/is-free}}
+            <h4 class="text-success text-center"><span class="glyphicon glyphicon-ok"></span> Enabled</h4>
+        </div>
+    </div>
+</div>

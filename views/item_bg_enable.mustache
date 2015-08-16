@@ -1,0 +1,15 @@
+<div class="col-md-4 col-sm-6">
+    <div class="thumbnail panel-success">
+        <div class="caption">
+        	<div class="background-display"><img src="{{path}}" /></div>
+            <h3>{{name}}</h3>
+            {{#is-free}}
+            <h4><span class="label label-success">Free <span class="glyphicon glyphicon-ok"></span></span></span></h4><br/>
+            {{/is-free}}
+            {{^is-free}}
+            <h4>Price: <span class="label label-success">{{price}} <span class="glyphicon glyphicon-ok"></span></span></span></h4><br/>
+            {{/is-free}}
+            <p class="text-center"><button type="button" class="btn btn-success bird-enable" data-type="{{type}}" data-path="{{id}}">Enable</button></p>
+        </div>
+    </div>
+</div>

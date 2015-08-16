@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container">
+            <p class="lead site-title"><span class="glyphicon glyphicon-exclamation-sign"></span> Please login to continue</p>
+            <div class="hidden-xs text-center proceed-login">
+                <img class="proceed-button" src="img/facebook/active_600.png">
+            </div>
+            <div class="visible-xs text-center proceed-login">
+                <img class="proceed-button" src="img/facebook/active_404.png">
+            </div>
+            </div>
+        </div>
+
+        {{>footer}}
+
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.oauth.js"></script>
+        <script type="text/javascript">
+        // origin path
+        window.origin = "{{&origin}}";
+
+        // start initialization
+        $(document).ready(function() {
+            oauth.init();
+        });
+        </script>
+    </body>
+</html>

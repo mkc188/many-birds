@@ -1,0 +1,8 @@
+<tr>
+    <td class="battle-player"><a href="https://facebook.com/{{p1-username}}"><img class="img-circle fb-pic" src="{{p1-pic}}"> {{p1-name}}</a></td>
+    <td class="battle-player">{{#is-p2}}<a href="https://facebook.com/{{p2-username}}"><img class="img-circle fb-pic" src="{{p2-pic}}"><span class="hidden-xs"> {{p2-name}}</span></a>{{/is-p2}}</td>
+    <td class="battle-player">{{#is-p3}}<a href="https://facebook.com/{{p3-username}}"><img class="img-circle fb-pic" src="{{p3-pic}}"><span class="hidden-xs"> {{p3-name}}</span></a>{{/is-p3}}</td>
+    <td class="battle-player">{{#is-p4}}<a href="https://facebook.com/{{p4-username}}"><img class="img-circle fb-pic" src="{{p4-pic}}"><span class="hidden-xs"> {{p4-name}}</span></a>{{/is-p4}}</td>
+    <td class="battle-status {{status-type}} hidden-xs">{{status}}</td>
+    <td class="battle-option"><button type="button" class="btn btn-primary battle-join" data-loading-text="Loading..." data-path="{{hostid}}" {{#is-playing}}disabled="disabled"{{/is-playing}}>Join</button></td>
+</tr>

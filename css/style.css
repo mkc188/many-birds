@@ -1,0 +1,340 @@
+/* site wide */
+@media (max-width: 765px) {
+	.navbar-brand {	text-indent: -20px; }
+}
+@media (min-width: 768px) {
+	.navbar-brand {
+		background: url("../img/navbar_icon.png") no-repeat left;
+		background-size: 50px auto;
+		text-indent: 40px;
+	}
+}
+@media (max-width: 765px) {
+	.navbar { margin-bottom: 2px; }
+}
+@media (min-width: 768px) {
+	.navbar { margin-bottom: 10px; }
+}
+.fb-navbar { padding-top: 5px; }
+.fb-dropdown, .fb-dropdown:hover, .fb-dropdown:active, .fb-dropdown:link { text-decoration: none; }
+.fb-dot {
+	float: left;
+	margin-top: 15px;
+	margin-right: 5px;
+	background: #46A800;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+}
+.fb-name {
+	padding: 3px 20px;
+	white-space: nowrap;
+	color: #333333;
+}
+.fb-name .link {
+	color: #627AAD;
+	cursor: pointer;
+}
+.fb-pic {
+	height: 40px;
+	width: 40px;
+}
+.fb-name .link:hover { text-decoration: underline; }
+.fb-logout { color: #D43F3A !important; }
+
+.table-borderless tr,
+.table-borderless td,
+.table-borderless th {
+    border: none !important;
+}
+
+/* assume facebook not logined */
+.fb-logined 	{ display: none; }
+.fb-not-logined { display: none; }
+
+/* index page */
+div#box-facebook {
+	text-align: center;
+}
+@media (max-width: 765px) {
+	p.site-title { font-size: 18px; margin-bottom: 5px; }
+}
+@media (min-width: 768px) {
+	p.site-title { text-indent: 50px; }
+}
+div#box-realtime {
+	background: url("../img/game/night_bg.png") repeat-x;
+	background-size: contain;
+	max-height: 512px;
+	margin-bottom: 10px;
+}
+@media (max-width: 765px) {
+	.proceed-login { width: 202px; }
+}
+@media (min-width: 768px) {
+	.proceed-login { width: 300px; }
+}
+.proceed-login {
+	margin-left: auto;
+	margin-right: auto;
+}
+.proceed-button { cursor: pointer; }
+
+/* mode select page */
+.mode-select {
+	padding: 10px;
+	cursor: pointer;
+}
+.mode-select p:first-child {
+	font-size: 22px;
+	margin-bottom: 5px;
+}
+div#mode-online {
+	border: 3px solid rgb(84, 164, 321);
+
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(bg.png) repeat 0 0, url("../img/online.png");
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), url("../img/online.png");
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,0.6))), url("../img/online.png");
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/online.png");
+	background: -o-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/online.png");
+	background: -ms-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/online.png");
+	background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/online.png");
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+div#mode-online:hover {
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url(bg.png) repeat 0 0, url("../img/online.png");
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), url("../img/online.png");
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0.6))), url("../img/online.png");
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/online.png");
+	background: -o-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/online.png");
+	background: -ms-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/online.png");
+	background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/online.png");
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+div#mode-battle {
+	border: 3px solid rgb(153, 84, 221);
+
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(bg.png) repeat 0 0, url("../img/battle.png");
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.6) 100%), url("../img/battle.png");
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.6)), color-stop(100%,rgba(255,255,255,0.6))), url("../img/battle.png");
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/battle.png");
+	background: -o-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/battle.png");
+	background: -ms-linear-gradient(top, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/battle.png");
+	background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("../img/battle.png");
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+div#mode-battle:hover {
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), url(bg.png) repeat 0 0, url("../img/battle.png");
+	background: -moz-linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), url("../img/battle.png");
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0.6))), url("../img/battle.png");
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/battle.png");
+	background: -o-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/battle.png");
+	background: -ms-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/battle.png");
+	background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url("../img/battle.png");
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+
+/* tournament page */
+.tournament-loading {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.tournament-ranking {
+	width: 100%;
+}
+.tournament-ranking th {
+	font-size: 16px;
+}
+.tournament-ranking td {
+	vertical-align: middle !important;
+	padding: 0px !important;
+	height: 60px !important;
+}
+.tournament-ranking th.title-rank {
+	text-align: center;
+}
+.tournament-ranking th.title-score {
+	text-align: right;
+}
+.wt-bird {
+	width: 10%;
+}
+.wt-medal {
+	width: 15%;
+}
+.wt-rank {
+	text-align: center;
+}
+.wt-row-selected {
+	background-color: #FAF7DE;
+}
+.wt-row-myself {
+	background-color: #F5E0FF;
+}
+.wt-name a {
+	color: #0039B3;
+}
+.wt-score-challenge { display: none; }
+@media (max-width: 765px) {
+	.tournament-ranking th.title-rank {
+		width: 2%;
+	}
+	.wt-name h4 {
+		font-size: 14px !important;
+	}
+	.wt-score {
+		width: 25%;
+		text-align: right;
+	}
+	.wt-pic {
+		height: 30px;
+		width: 30px;
+	}
+}
+@media (min-width: 768px) {
+	.tournament-ranking th.title-rank {
+		width: 10%;
+	}
+	.wt-name {
+		width: 40%;
+	}
+	.wt-score {
+		width: 25%;
+	}
+	.wt-pic {
+		height: 40px;
+		width: 40px;
+	}
+}
+
+/* faq page */
+.voting-section { cursor: pointer; }
+
+.upvote:hover, .downvote:hover { text-decoration: underline; }
+.upvote-text, .downvote-text { display: none; }
+
+.upvoted, .downvoted { font-weight: bold; }
+.upvoted { color: #3C763D; }
+.downvoted { color: #A94442; }
+
+/* achievement page */
+.achievement-icon {
+	margin-top: 5px;
+	width: 50px;
+}
+.achievement-icon img { width: 44px; }
+.achievement-detail { margin-bottom: 0px; }
+.achievement-detail-value { width: 1%; }
+.achievement-detail-value h4 { margin-top: 0px; margin-bottom: 0px; }
+.achievement-detail-progess { margin-bottom: 0px; }
+.achievement-detail-title {	width: 10%; }
+.medal-progessing {
+	opacity: 0.1;
+	filter:alpha(opacity=10);
+}
+.achievement-item { margin-bottom: 10px !important; }
+
+/* item shop page */
+.shop-status {
+	text-align: right;
+	float: right;
+}
+.bird-cage {
+	height: 60px;
+	position: relative;
+}
+.bird-display-top { height: 10px !important; }
+.background-display { text-align: center; }
+@media (max-width: 765px) {
+	.background-display img { width: 250px; }
+}
+
+/* battle page */
+.battle-player {
+	width: 20%;
+	vertical-align: middle !important;
+}
+.battle-status {
+	width: 10%;
+	vertical-align: middle !important;
+}
+.battle-option {
+	width: 10%;
+	vertical-align: middle !important;
+}
+.battle-rank td {
+	vertical-align: middle !important;
+}
+
+/* game: online mode page */
+div#online-gameplay { padding: 0; }
+#online-tournament {
+	overflow-y: scroll
+}
+.online-tournament-loading {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.online-tournament-ranking {
+	width: 100%;
+}
+.online-tournament-ranking th {
+	font-size: 16px;
+}
+.online-tournament-ranking td {
+	vertical-align: middle !important;
+	padding: 0px !important;
+	height: 60px !important;
+}
+.online-tournament-ranking th.title-rank {
+	text-align: center;
+}
+.online-tournament-ranking th.title-score {
+	text-align: right;
+}
+.owt-rank {
+	text-align: center;
+}
+.owt-row-selected {
+	background-color: #FAF7DE;
+}
+.owt-row-myself {
+	background-color: #F5E0FF;
+}
+.owt-name a {
+	color: #0039B3;
+	font-size: 16px;
+}
+.owt-score-challenge { display: none; }
+.online-tournament-ranking th.title-rank {
+	width: 10%;
+}
+.owt-name {
+	width: 60%;
+}
+.owt-score {
+	width: 30%;
+	}
+.owt-pic {
+	height: 40px;
+	width: 40px;
+}
+
+.bird-display {
+    position: absolute;
+    left: 25%;
+    bottom: 0;
+	margin: 0 auto;
+}​

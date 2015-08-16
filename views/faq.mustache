@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container">
+            <p class="lead site-title">Frequently Asked Questions</p>
+            <div class="row">
+                <div class="col-md-1 hidden-xs"></div>
+                <div class="col-md-10">
+                    <div class="panel-group" id="accordion">
+                    {{&faq_content}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for user contact us -->
+        <div class="modal fade" id="faq-contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">You may contact us</h4>
+                    </div>
+                    <div class="modal-body">
+                    please send your problem to our email at <span class="text-primary">kalystak@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.tpl.js"></script>
+        <script type="text/javascript" src="js/ui.faq.js"></script>
+        <script type="text/javascript">
+        // start initialization
+        $(document).ready(function() {
+            faq.init();
+        });
+        </script>
+    </body>
+</html>

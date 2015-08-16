@@ -1,0 +1,28 @@
+<div class="panel {{panel-type}} achievement-item">
+    <div class="panel-body">
+        <div class="media">
+            <span class="pull-left achievement-icon">
+                <img class="media-object medal-progessing" src="{{icon-path}}" alt="{{name}}">
+            </span>
+            <div class="media-body">
+                <h3 class="media-heading">{{name}}<span class="pull-right"><span class="glyphicon glyphicon-time"></span></span></h3>
+                <table class="table table-borderless achievement-detail">
+                    <tr>
+                        <td class="achievement-detail-title hidden-xs">Requirement:</td>
+                        <td colspan="2">{{&requirement}} <strong class="text-danger">before {{time}}</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="achievement-detail-title hidden-xs">Progress:</td>
+                        <td class="achievement-detail-value"><h4 class="text-primary">{{current}}<small class="text-muted">/{{target}}</small></h4></td>
+                        <td>
+                            <div class="progress progress-striped achievement-detail-progess">
+                                <div class="progress-bar {{progress-bar-type}}" role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}}%">
+                                <span class="sr-only"></span></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="col-md-4 col-sm-6">
+    <div class="thumbnail panel-warning">
+        <div class="caption">
+        	<div class="background-display"><img src="{{path}}" /></div>
+            <h3>{{name}}</h3>
+            {{#is-free}}
+            <h4><span class="label label-warning">Free</span></h4><br/>
+            {{/is-free}}
+            {{^is-free}}
+            <h4>Price: <span class="label label-warning">{{price}}</span></h4><br/>
+            {{/is-free}}
+            <p class="text-center"><button type="button" class="btn btn-info bird-purchase" data-name="{{name}}" data-path="{{id}}" data-price="{{price-value}}">Purchase</button></p>
+        </div>
+    </div>
+</div>

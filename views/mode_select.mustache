@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container">
+            <p class="lead site-title">Select game mode:</p>
+            <div class="row">
+                <div class="col-sm-6 mode-select" id="mode-online">
+                    <p>Online Mode</p>
+                    <p class="lead hidden-xs">play with all online players the same time, and join the tournament.</p>
+                    <strong class="visible-xs text-danger">play with all online players the same time, and join the tournament.</strong>
+                </div>
+                <div class="col-sm-6 mode-select" id="mode-battle">
+                    <p>Battle Mode</p>
+                    <p class="lead hidden-xs">maximum four players in a game room, in two minutes limit.</p>
+                    <strong class="visible-xs text-danger">maximum four players in a game room, in two minutes limit.</strong>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.mode_select.js"></script>
+        <script type="text/javascript">
+        // start initialization
+        $(document).ready(function() {
+            mode_select.init();
+        });
+
+        $(window).resize(function() {
+            mode_select.resize();
+        });
+        </script>
+    </body>
+</html>

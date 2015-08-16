@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container" id="shop-content">
+            <p class="lead site-title">Item Shop <span class="visible-xs">(available score for purchase: <strong class="text-primary">{{score}}</strong>)</span></p>
+            <div class="shop-status">
+                <span class="hidden-xs"><button type="button" class="btn btn-warning" data-toggle="popover" id="shop-available"><span class="glyphicon glyphicon-usd"></span></button></span>
+                <span class="hidden-xs shop-refresh-section"><button type="button" class="btn btn-info shop-refresh"><span class="glyphicon glyphicon-refresh"></span></button></span>
+            </div>
+
+            <h3 style="padding-top: 10px;"><span class="glyphicon glyphicon-user"></span> Bird Theme</h3>
+            <div class="row">{{&bird-items}}</div>
+            <div class="clearfix"></div>
+            <h3><span class="glyphicon glyphicon-picture"></span> Background Theme</h3>
+            <div class="row">{{&background-items}}</div>
+        </div>
+
+        <!-- danger-colored modal -->
+        <div class="modal fade" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-warning modal-sm">
+                <div class="modal-content panel-warning">
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Please confirm</h4>
+                    </div>
+                    <div class="modal-body" id="warning-message">to pay <strong id="warning-price" class="text-danger"></strong> for theme <strong id="warning-name" class="text-success"></strong>?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="purchase-cancel">Close</button>
+                        <button type="button" class="btn btn-primary" id="purchase-confirm" data-loading-text="Loading...">Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- danger-colored modal -->
+        <div class="modal fade" id="danger-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-danger modal-sm">
+                <div class="modal-content panel-danger">
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body" id="danger-message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page CSS -->
+        {{&css3-fly}}
+
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.tpl.js"></script>
+        <script type="text/javascript" src="js/ui.shop.js"></script>
+        <script type="text/javascript">
+        window.available_score = {{score}};
+
+        // start initialization
+        $(document).ready(function() {
+            shop.init();
+        });
+        </script>
+    </body>
+</html>

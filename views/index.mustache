@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <div class="container">
+            <p class="lead site-title">A multiplayer Flappy Bird game.</p>
+        </div>
+
+        <!-- Real‐time characters -->
+        <div id="box-realtime" style="display:none"></div>
+        <div id="index-logo" class="text-center"><img src="img/background.png" /><br/></div>
+
+        <div class="container">
+            <!-- Facebook login / Continue Box -->
+            <div id="box-facebook">
+                <div class="fb-not-logined">
+                    <div class="hidden-xs proceed-login">
+                        <img class="proceed-button" src="img/facebook/active_600.png">
+                    </div>
+                    <div class="visible-xs proceed-login">
+                        <img class="proceed-button" src="img/facebook/active_404.png">
+                    </div>
+                </div>
+                <div class="fb-logined">
+                    <div class="hidden-xs">
+                        <button type="button" class="btn btn-success proceed-mode" style="width: 300px; height: 46px;" data-loading-text="Loading...">Continue</button>
+                    </div>
+                    <div class="visible-xs">
+                        <button type="button" class="btn btn-success proceed-mode" style="width: 202px; height: 46px;" data-loading-text="Loading...">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+ 
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.home.js"></script>
+        <script type="text/javascript">
+        // start initialization
+        $(document).ready(function() {
+            home.init();
+        });
+
+        $(window).resize(function() {
+            home.resize();
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-target="#collapse{{id}}" data-parent="#accordion" href="#collapse{{id}}">{{question}}</a>
+            <i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+        </h3>
+    </div>
+    <div id="collapse{{id}}" class="panel-collapse collapse">
+        <div class="panel-body"> 
+        {{answer}}
+        {{#is-logined}}
+        <div class="pull-right voting-section" data-path="{{id}}">
+            <span class="upvote {{#is-upvoted}}upvoted{{/is-upvoted}}" data-target="{{id}}" data-action="upvote"><span class="glyphicon glyphicon-thumbs-up"></span> <span class="upvote-text">Solved</span></span>
+            <span class="downvote {{#is-downvoted}}downvoted{{/is-downvoted}}" data-target="{{id}}" data-action="downvote"><span class="glyphicon glyphicon-thumbs-down"></span> <span class="downvote-text">Not helpful</span></span>
+        </div>
+        {{/is-logined}}
+        </div>
+    </div>
+</div>

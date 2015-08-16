@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container">
+            <p class="lead site-title">Battle Lobby</p>
+            <div class="row">
+                <div class="col-md-1 hidden-xs"></div>
+                <div class="col-md-10">
+                    <h3><span class="glyphicon glyphicon-user"></span> My Room</h3>
+                    <table class="battle-my-room table">
+                        <thead>
+                        <tr>
+                            <th class="hidden-xs">Host</th>
+                            <th colspan="3">Players</th>
+                            <th colspan="2">Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="battle-player hidden-xs"><img class="img-circle fb-pic" src="{{fb_pic}}"> Me</td>
+                                <td class="battle-player">{{#is-my-p2}}<a href="https://facebook.com/{{my-p2-username}}" target="_blank"><img class="img-circle fb-pic" src="{{my-p2-pic}}"><span class="hidden-xs"> {{my-p2-name}}</span></a>{{/is-my-p2}}</td>
+                                <td class="battle-player">{{#is-my-p3}}<a href="https://facebook.com/{{p3-username}}" target="_blank"><img class="img-circle fb-pic" src="{{my-p3-pic}}"><span class="hidden-xs"> {{my-p3-name}}</span></a>{{/is-my-p3}}</td>
+                                <td class="battle-player">{{#is-my-p4}}<a href="https://facebook.com/{{p4-username}}" target="_blank"><img class="img-circle fb-pic" src="{{my-p4-pic}}"><span class="hidden-xs"> {{my-p4-name}}</span></a>{{/is-my-p4}}</td>
+                                <td><button type="button" class="btn btn-success battle-join" data-loading-text="Loading..." data-path="{{fb_uid}}">Play</button></td>
+                                <td><button type="button" class="btn btn-danger battle-new" data-loading-text="Loading...">New</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="padding-top: 10px;"><span class="glyphicon glyphicon-globe"></span> Friends' Room</h3>
+                    <table class="battle-my-room table">
+                        <thead>
+                        <tr>
+                            <th>Host</th>
+                            <th colspan="3">Players</th>
+                            <th class="hidden-xs">Status</th>
+                            <th>Option</th>
+                        </tr>
+                        </thead>
+                        <tbody>{{&battle-list}}</tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- danger-colored modal -->
+        <div class="modal fade" id="danger-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-danger modal-sm">
+                <div class="modal-content panel-danger">
+                    <div class="modal-header panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Error</h4>
+                    </div>
+                    <div class="modal-body" id="danger-message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.battle.js"></script>
+        <script type="text/javascript">
+        // start initialization
+        $(document).ready(function() {
+            battle.init();
+        });
+        </script>
+    </body>
+</html>

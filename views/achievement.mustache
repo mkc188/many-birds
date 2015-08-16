@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div class="container">
+            <p class="lead site-title">Your Achievements</p>
+            <div class="pull-right hidden-xs"><button type="button" class="btn btn-default achievement-refresh"><span class="glyphicon glyphicon-refresh"></span></button></div>
+            <div class="row">
+                <div class="col-md-1 hidden-xs"></div>
+                <div class="col-md-10" id="achievement-content">
+                    <div class="panel-group">
+                    {{&achievement-list}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/ui.tpl.js"></script>
+        <script type="text/javascript" src="js/ui.achievement.js"></script>
+        <script type="text/javascript">
+        // start initialization
+        $(document).ready(function() {
+            achievement.init();
+        });
+        </script>
+    </body>
+</html>

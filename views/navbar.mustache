@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand -->
+        <div class="navbar-header pull-left">
+            <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {{#is-logined}}
+            <a class="navbar-brand" href="./mode_select.php">Many Birds</a>
+            {{/is-logined}}
+            {{^is-logined}}
+            <a class="navbar-brand" href="./">Many Birds</a>
+            {{/is-logined}}
+        </div>
+
+        {{#showfb}}
+        <!-- Facebook Account -->
+        <div class="navbar-header pull-right {{^is-logined}}fb-logined{{/is-logined}}">
+            <div class="dropdown fb-navbar">
+                <a href="#" class="fb-dropdown" data-toggle="dropdown"><div class="fb-dot"></div><img src="{{fb_pic}}" class="img-circle fb-pic"> <b class="caret"></b></a>
+                <ul class="dropdown-menu pull-right">
+                    <li class="fb-name">Signed in as <span class="link"></span>.</li>
+                    <li class="divider"></li>
+                    <li><a href="#" class="fb-logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        {{/showfb}}
+
+        <!-- Other navbar items -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {{#is-logined}}
+                <li><a href="shop.php"><span class="glyphicon glyphicon-gift"></span> Item Shop</a></li>
+                <li><a href="achievement.php"><span class="glyphicon glyphicon-tower"></span> Achievement</a></li>
+                <li><a href="tournament.php"><span class="glyphicon glyphicon-sort"></span> Weekly Tournament</a></li>
+                {{/is-logined}}
+                <li><a href="faq.php"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

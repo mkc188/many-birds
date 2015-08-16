@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>header}}
+    <body>
+        {{>navbar}}
+
+        <!-- Content -->
+        <div id="online-content" class="container">
+            <p class="lead site-title hidden-xs">Battle in <span class="text-primary">{{hostname}}</span>'s gameroom</p>
+
+            <!-- Gameplay -->
+            <div class="row">
+                <div class="col-sm-2 text-right"><button type="button" class="btn btn-primary" id="time-count" disabled="disabled">120 seconds left</button></div>
+                <div class="col-sm-8 text-left">
+                    {{#is-host}}
+                    You are the host. You may <button type="button" class="btn btn-success battle-start"><span class="glyphicon glyphicon-play"></span> Start Game</button> or <button type="button" class="btn btn-danger battle-leave"><span class="glyphicon glyphicon-road"></span> Leave</button>
+                    {{/is-host}}
+                    {{^is-host}}
+                    You are player. You may wait for the host starting the game or <button type="button" class="btn btn-danger battle-leave"><span class="glyphicon glyphicon-road"></span> Leave</button>
+                    {{/is-host}}
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row">
+            <div class="col-sm-1"></div>
+            <div id="battle-gameplay" class="col-sm-10"><div id="battle-gameplay-container"></div></div>
+            </div>
+        </div>
+
+        <!-- info-colored modal -->
+        <div class="modal fade" id="info-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-info modal-sm">
+                <div class="modal-content panel-info">
+                    <div class="modal-header panel-heading">
+                        <h4 class="modal-title">Please wait</h4>
+                    </div>
+                    <div class="modal-body" id="info-message">Game score is syncing within 5 seconds.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- success-colored modal -->
+        <div class="modal fade" id="success-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-success modal-sm">
+                <div class="modal-content panel-success">
+                    <div class="modal-header panel-heading">
+                        <h4 class="modal-title">Battle Rank</h4>
+                    </div>
+                    <div class="modal-body battle-rank" id="success-message">
+                        <table class="table battle-ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Players</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning battle-leave">Leave</button>
+                        <button type="button" class="btn btn-success battle-continue">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+        
+        <!-- Page javascript -->
+        <script type="text/javascript" src="js/phaser.min.js"></script>
+        <script type="text/javascript" src="js/ui.tpl.js"></script>
+        <script type="text/javascript" src="js/ui.battleplay.js"></script>
+        <script type="text/javascript" src="js/game.online.js"></script>
+        <script type="text/javascript">
+        window.hostid = {{hostid}};
+
+        // start initialization
+        $(document).ready(function() {
+            battleplay.init();
+        });
+        </script>
+    </body>
+</html>
