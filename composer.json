@@ -1,0 +1,7 @@
+{
+    "require": {
+        "facebook/php-sdk-v4": "^5.0",
+        "sergeytsalkov/meekrodb": "^2.3",
+        "mustache/mustache": "^2.8"
+    }
+}

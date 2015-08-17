@@ -12,8 +12,10 @@ require_once('./config.php');
 // credits: http://stackoverflow.com/questions/5897901/facebook-php-sdk-session-logic
 header('P3P: CP="CAO PSA OUR"');
 
+// Composer autoload
+require_once __DIR__ . '/vendor/autoload.php';
+
 // Database handler
-require_once('./includes/meekrodb.2.2.class.php');
 DB::$user 	  = $_CONF['db']['user'];
 DB::$password = $_CONF['db']['pass'];
 DB::$dbName   = $_CONF['db']['name'];
@@ -27,11 +29,11 @@ require_once('./includes/class.session.php');
 new Session($_CONF['session_lifetime']);
 
 // Facebook API
-require_once('./includes/Facebook/facebook.php');
-$facebook = new Facebook(array(
-	'appId'  => $_CONF['fb']['appid'],
-	'secret' => $_CONF['fb']['secret'],
-));
+$facebook = new Facebook\Facebook([
+    'app_id'     => $_CONF['fb']['appid'],
+    'app_secret' => $_CONF['fb']['secret'],
+    'default_graph_version' => 'v2.4'
+]);
 unset($_CONF['fb']);
 
 // System constants
@@ -44,8 +46,6 @@ $_FB = $auth->getBasicInfo();
 
 // Template engine
 if( defined('REQUIRE_TPL') ) {
-	require './includes/Mustache/Autoloader.php';
-	Mustache_Autoloader::register();
 	$mustache = new Mustache_Engine(array(
 	    'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views'),
     ));

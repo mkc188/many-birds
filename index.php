@@ -9,7 +9,7 @@ $tpl = $mustache->loadTemplate('index');
 echo $tpl->render(array_merge($_FB, array(
 	// section toggles
 	'showfb'     => true,
-	'is-logined' => $auth->valid(),
+    'is-logined' => $auth->valid(),
 
 	// contents
 )));
