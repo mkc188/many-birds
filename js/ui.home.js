@@ -16,7 +16,7 @@ var home = {
 					$(".proceed-login").html('<br /><div class="progress progress-striped active"><div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%"></div></div>');
 					home.proceed(response);
 				}
-			});
+			}, {scope: 'user_friends'});
 		});
 		$(".proceed-mode").click(function() {
 			$(this).button("loading");
@@ -35,7 +35,6 @@ var home = {
 		if( response.authResponse ) {
 			$.ajax({ async: false, dataType: "json", type: "POST",
 				url: "action.php?do=auth.login&rand=" + Math.random(),
-				data: "signed=" + response.authResponse.signedRequest,
 				success: function(response){
 					window.location.href = response.next;
 				}

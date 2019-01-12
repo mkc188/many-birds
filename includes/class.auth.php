@@ -9,6 +9,7 @@ if( !defined('IN_PAGE') ) {
 class Auth {
 	public $uid = 0;
 	public $profile = array();
+	private $accessToken;
 
 	/**
 	 * Constructor
@@ -16,21 +17,29 @@ class Auth {
 	public function __construct($force_login) {
 		global $_CONF, $_PAGE, $facebook;
 
-		// set access token in seesion (if any)
-		if( !empty($_SESSION['access_token']) ) {
-		    $facebook->setAccessToken($_SESSION['access_token']);
-		}
+		if( !empty($_SESSION['fb_access_token']) ) {
+			// set default access token for following requests
+			$facebook->setDefaultAccessToken($_SESSION['fb_access_token']);
 
-		if( $facebook->getUser() > 0 ) {
-			/* 
-			 * From FB SDK, a non-zero uid returned, hence we assume user logined in,
-			 * to verify user has an active access token, manually call:
-			 *
-			 *     $this->getGraphProfile();
-			 *
-			 * instead, note: calling this function for every page would be a performance impact.
-			 */
-			$this->uid = $facebook->getUser();
+			$helper = $facebook->getJavaScriptHelper();
+
+			// Grab the signed request entity
+			$sr = $helper->getSignedRequest();
+
+			// Get the user ID if signed request exists
+			$user = $sr ? $sr->getUserId() : null;
+
+			if( $user ) {
+				// user logined in, set uid
+				$this->uid = $user;
+
+				$this->accessToken = $_SESSION['fb_access_token'];
+
+				$graphProfile = $this->getGraphProfile();
+				if( $graphProfile['success'] ) {
+					$this->profile = $graphProfile['profile'];
+				}
+			}
 		}
 
 		if( defined('REQUIRE_FB') && $this->uid == 0 ) {
@@ -62,37 +71,34 @@ class Auth {
 	 * @param string token
 	 * @return boolern
 	 */
-	public function login($signed_request) {
+	public function login() {
 		global $facebook;
 
 		$success = false;
 
-		$data = $this->parse_signed_request($signed_request);
-		if( !is_array($data) ) {
-			// bad JSON signuature
-			return false;
-		}
+		$helper = $facebook->getJavaScriptHelper();
 
-		// test token with Graph API
-		$token = $this->tokenFromOAuth($data['code']);
-		$facebook->setAccessToken($token);
-		$result = $this->getGraphProfile();
+		try {
+			$accessToken = $helper->getAccessToken();
+		} catch( Exception $e ) { }
 
-		if( $result['success'] ) {
-			// get extended access token from Facebook
-			$facebook->setExtendedAccessToken();
-			$token = $facebook->getAccessToken();
-			$facebook->setAccessToken($token);
+		if( isset($accessToken) ) {
+			$success = true;
 
-			$this->profile = $result['profile'];
-			$_SESSION['access_token'] = $token;
-			$this->update($token);
+			$oAuth2Client = $facebook->getOAuth2Client();
+			$accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+
+			$token = $accessToken->getValue();
+			$_SESSION['fb_access_token'] = $token;
+
+			$facebook->setDefaultAccessToken($accessToken);
+			$this->update();
 
 			// remove oauth_verify if the user login via redirection to oauth page
 			unset($_SESSION['oauth_verify']);
 		}
 
-		return $result['success'];
+		return $success;
 	}
 
 	/**
@@ -104,14 +110,13 @@ class Auth {
 		global $facebook;
 
 		// clear access token and session
-		$facebook->destroySession();
 		session_destroy();
 
 		return true;
 	}
 
 	/**
-	 * Get username and name of current user
+	 * Get name of current user
 	 *
 	 * @return array
 	 */
@@ -174,19 +179,19 @@ class Auth {
 		$success = false;
 		$user_profile = array();
 		try {
-			$user_profile = $facebook->api('/me','GET');
+			$response = $facebook->get('/me?fields=id,name,updated_time');
+			$user_profile = $response->getGraphUser();
+
 			$success = true;
-		} catch(FacebookApiException $e) {}
+		} catch(Exception $e) { }
 
 		return array('success' => $success, 'profile' => $user_profile);
 	}
 
 	/**
 	 * Update or create user profile if needed
-	 *
-	 * @param string token
 	 */
-	private function update($token) {
+	private function update() {
 		// get profile from graph if no cached profile
 		if( !isset($this->profile['id']) || $this->profile['id'] != $this->uid ) {
 			$result = $this->getGraphProfile();
@@ -197,100 +202,25 @@ class Auth {
 			}
 		}
 
+		$token = ( isset($_SESSION['fb_access_token']) ) ? $_SESSION['fb_access_token'] : null;
+
 		// query the user table
-		$result = DB::queryFirstRow("SELECT uid, updated, access_token FROM users WHERE uid = %i LIMIT 1", $this->profile['id']);
+		$result = DB::queryFirstRow("SELECT uid FROM users WHERE uid = %i LIMIT 1", $this->profile['id']);
 
-		if( $result['uid'] > 0 ) {
-			// user exists in database
+		// user not exists in database
+		DB::insertUpdate('users', array(
+			'uid'      => $this->profile['id'],
+			'username' => $this->profile['id'],
+			'name'     => $this->profile['name'],
+			'updated'  => $this->profile['updated_time'],
+		));
 
-			$isOutdated = (strcmp($result['updated'], $this->profile['updated_time']) != 0);
-			$isDiffToken = (strcmp($token, $result['access_token']) != 0);
-
-			if( $isOutdated || $isDiffToken ) {
-				// profile updated
-				DB::update('users', array(
-					'uid'              => $this->profile['id'],
-					'username'         => $this->profile['username'],
-					'name'             => $this->profile['name'],
-					'updated'          => $this->profile['updated_time'],
-					'access_token'     => $token,
-				), "uid=%i", $this->profile['id']);
-			}
-
-		} else {
-			// user not exists in database
-			DB::insert('users', array(
-				'uid'              => $this->profile['id'],
-				'username'         => $this->profile['username'],
-				'name'             => $this->profile['name'],
-				'updated'          => $this->profile['updated_time'],
-				'access_token'     => $token,
-			));
-
-			// create default theme for user
+		// grant default theme for user just created their account
+		if( !isset($result['uid']) ) {
 			require_once('./includes/class.shop.php');
 			$s = new Shop();
 			$s->grantDefaultItem($this->profile['id']);
 		}
-	}
-
-	/**
-	 * Exchange code for token with Facebook Graph
-	 *
-	 * @param string code
-	 * @return string token
-	 */
-	public function tokenFromOAuth($code, $redirect_uri = '') {
-		global $facebook;
-
-    	$path = "https://graph.facebook.com/oauth/access_token";
-    	$query = array(
-            'client_id'     => $facebook->getAppId(),
-            'client_secret' => $facebook->getAppSecret(),
-            'redirect_uri'  => $redirect_uri,
-            'code'          => $code,
-        );
-
-		$response = file_get_contents($path . "?" . http_build_query($query));
-		$params = null;
-		parse_str($response, $params);
-		return $params['access_token'];
-	}
-
-	/**
-	 * Get JSON content from Facebook signed request
-	 * credits: https://developers.facebook.com/docs/facebook-login/using-login-with-games/
-	 *
-	 * @param string signed request
-	 * @return string JSON array
-	 */
-	private function parse_signed_request($signed_request) {
-		global $facebook;
-
-		list($encoded_sig, $payload) = explode('.', $signed_request, 2); 
-
-		// decode the data
-		$sig = $this->base64_url_decode($encoded_sig);
-	 	$data = json_decode($this->base64_url_decode($payload), true);
-
-		// confirm the signature
-		$expected_sig = hash_hmac('sha256', $payload, $facebook->getAppSecret(), $raw = true);
-		if ($sig !== $expected_sig) {
-			error_log('Bad Signed JSON signature!');
-			return null;
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Base64 URL decode
-	 *
-	 * @param string signed request
-	 * @return string JSON array
-	 */
-	private function base64_url_decode($input) {
-		return base64_decode(strtr($input, '-_', '+/'));
 	}
 }
 

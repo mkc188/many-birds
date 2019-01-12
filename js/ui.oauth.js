@@ -1,11 +1,14 @@
-$(document).ready(function() {
-	$.ajaxSetup({ cache: true });
-	$.getScript('//connect.facebook.net/en_UK/all.js', function(){
-		FB.init({
-			appId:  '835001473193147',
-		});
-	});
-});
+window.fbAppId = '835001473193147';
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId:   window.fbAppId,
+    xfbml:   true,
+    version: 'v2.4',
+    status:  true,
+    cookie:  true
+  });
+};
 
 var oauth = {
 	/*
@@ -21,7 +24,7 @@ var oauth = {
 				if (response.authResponse) {
 					oauth.proceed(response);
 				}
-			});
+			}, {scope: 'user_friends'});
 		});
 	},
 

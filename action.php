@@ -10,10 +10,8 @@ $action = ( !empty($_REQUEST["do"]) ) ? $_REQUEST["do"] : '';
  * Auth
  */
 if( $action == "auth.login" ) {
-	$signed = ( !empty($_POST["signed"]) ) ? $_POST["signed"] : '';
-
-	if( $auth->login($signed) ) {
-    	$return = array('success' => true, 'next' => $_PAGE['mode_select']);
+	if( $auth->login() ) {
+		$return = array('success' => true, 'next' => $_PAGE['mode_select']);
     } else {
     	$return = array('success' => false, 'next' => $_PAGE['home']);
     }
